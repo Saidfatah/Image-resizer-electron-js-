@@ -10,6 +10,11 @@ const isMac = process.platform === 'darwin';
 let mainWindow;
 let aboutWindow;
 
+if(isMac) {
+  app.dock.hide()                                     // - 1 - 
+}
+
+
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) {
   app.quit();
@@ -30,6 +35,9 @@ const createWindow = () => {
   mainWindow.loadFile(path.join(__dirname, './renderer/index.html'));
 
   // Open the DevTools.
+  mainWindow.setAlwaysOnTop(true, "screen-saver")     // - 2 -
+  mainWindow.setVisibleOnAllWorkspaces(true)          // - 3 -
+  
   mainWindow.webContents.openDevTools();
 };
 
